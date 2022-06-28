@@ -1,0 +1,11 @@
+[Unit]
+Description=Battmon
+After=multi-user.target
+
+[Service]
+Type=idle
+Restart=always
+ExecStart=/usr/bin/python3 ~/solar-host/battmon/battmon.py
+
+[Install]
+WantedBy=multi-user.target

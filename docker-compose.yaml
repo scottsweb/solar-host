@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  web:
+    image: joseluisq/static-web-server:latest
+    container_name: web
+    env_file: ./.settings.env
+    ports:
+      - 8080:80
+    volumes:
+      - ./web:/public:ro
+    restart: unless-stopped
+    command: -g info
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    network_mode: host
+    command: tunnel --no-autoupdate run --token ${CF_WEB_TOKEN}
+    depends_on:
+      - web
