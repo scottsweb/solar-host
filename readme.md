@@ -1,4 +1,4 @@
-![scott.ee](https://scott.ee/images/solar-host.png)
+![Solar Host](https://scott.ee/assets/img/solar-host.png)
 
 # Solar Host
 
